@@ -9,46 +9,22 @@ mcp-odoo-integration
 ├── client
 │   ├── src
 │   │   ├── gemini_client.py
-│   │   ├── config.py
 │   │   └── utils.py
-│   ├── .env
-│   ├── requirements.txt
-│   └── README.md
 ├── server
 │   ├── src
 │   │   ├── odoo_server.py
 │   │   ├── odoo_api.py
-│   │   └── config.py
-│   ├── .env 
-│   ├── requirements.txt
-│   └── README.md
 ├── .gitignore
+├── requirements.txt
 └── README.md
 ```
 
-## Client Setup
-
-1. Navigate to the `client` directory.
-2. Create a `.env` file with your Odoo API credentials.
-3. Install the required dependencies using:
-   ```
-   pip install -r requirements.txt
-   ```
-
-## Server Setup
-
-1. Navigate to the `server` directory.
-2. Create a `.env` file with your Odoo API credentials.
-3. Install the required dependencies using:
-   ```
-   pip install -r requirements.txt
-   ```
 
 ## Installation
 
 1. Create a virtual environment:
 ```bash
-python -m venv venv
+python3 -m venv venv
 source venv/bin/activate
 ```
 
@@ -57,15 +33,20 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-3. Install development dependencies (optional):
-```bash
-pip install -r requirements.txt[dev]
-```
+
 
 ## Usage
 
-- Start the server by running `odoo_server.py`.
-- Use the client to connect to the MCP server and retrieve available products from the Odoo API.
+
+## Client Start
+
+1. Navigate to the `client` directory.
+2. python3 gemini_client.py
+
+## Server Start
+
+1. Navigate to the `server` directory.
+2. python3 odoo_server.py- Use the client to connect to the MCP server and retrieve available products from the Odoo API.
 
 ## Contributing
 
