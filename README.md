@@ -41,12 +41,24 @@ pip install -r requirements.txt
 ## Client Start
 
 1. Navigate to the `client` directory.
-2. python3 gemini_client.py
-
+```bash
+cd client/src
+```
+2. run
+```bash
+python3 gemini_client.py
+```
 ## Server Start
 
 1. Navigate to the `server` directory.
-2. python3 odoo_server.py- Use the client to connect to the MCP server and retrieve available products from the Odoo API.
+```bash
+cd server/src
+```
+2. 
+```bash
+python3 odoo_server.py
+```
+- Use the client to connect to the MCP server and retrieve available products from the Odoo API.
 
 ## Contributing
 
