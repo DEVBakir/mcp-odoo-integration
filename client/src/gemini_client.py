@@ -81,7 +81,6 @@ class GeminiClient:
         await self.exit_stack.aclose()
 
 async def main():
-    # Load configuration with correct API endpoint
     config = {
         'API_URL': os.getenv('GEMINI_API_URL', 'https://generativelanguage.googleapis.com/v1beta'),
         'API_KEY': os.getenv('GOOGLE_API_KEY')
