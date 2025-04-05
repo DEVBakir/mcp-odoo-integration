@@ -10,9 +10,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class GeminiClient:
-    def __init__(self, config):
+    def __init__(self):
         self.api_url = 'https://generativelanguage.googleapis.com/v1beta'
-        self.api_key = config['API_KEY']
+        self.api_key = os.getenv("GOOGLE_API_KEY")
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
         # Use a valid model name
@@ -79,31 +79,3 @@ class GeminiClient:
     async def close(self):
         """Close the connection to the MCP server."""
         await self.exit_stack.aclose()
-
-async def main():
-    config = {
-        'API_URL': os.getenv('GEMINI_API_URL', 'https://generativelanguage.googleapis.com/v1beta'),
-        'API_KEY': os.getenv('GOOGLE_API_KEY')
-    }
-    
-    client = GeminiClient(config)
-    server_path = os.path.join(os.path.dirname(__file__), 
-                              '../../server/src/odoo_server.py')
-    
-    try:
-        await client.connect_to_server(server_path)
-        print("\nGemini MCP Client Started! Type 'quit' to exit.")
-        
-        while True:
-            query = input("\nQuery: ").strip()
-            if query.lower() == 'quit':
-                break
-                
-            response = await client.process_query(query)
-            print(f"\nResponse: {response}")
-            
-    finally:
-        await client.close()
-
-if __name__ == "__main__":
-    asyncio.run(main())
