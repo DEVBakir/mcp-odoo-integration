@@ -60,9 +60,13 @@ async def shutdown_event():
 async def process_user_query(user_id: str, query: str):
     """Retrieve past messages from Redis and build conversation context."""
     past_messages = redis_client.lrange(f"chat_history:{user_id}", 0, -1)
-    print(past_messages)
     # Build conversation context
-    system_instruction = "You are an AI assistant having a continuous conversation with the user. Remember past context and provide helpful responses."
+    system_instruction = (
+    "You are an AI assistant engaging in an ongoing conversation with the user. "
+    "Always remember the previous context and provide helpful, context-aware responses. "
+    "Ensure all your replies are in Arabic and maintain a professional tone, similar to a customer support representative."
+    )
+
     context = system_instruction +"\n".join(past_messages) + f"\nUser: {query}"
 
     # Get AI response
@@ -137,7 +141,7 @@ async def send_whatsapp_message(recipient_id: str, message: str):
     """Send a WhatsApp message using the WhatsApp Business API."""
     url = "https://graph.facebook.com/v15.0/592460250612769/messages"  # Replace with your phone number ID
     headers = {
-        "Authorization": f"Bearer {os.getenv("WHATSAPP_API_TOKEN")}",
+        "Authorization": f"Bearer {os.getenv('WHATSAPP_API_TOKEN')}",
         "Content-Type": "application/json"
     }
     payload = {

@@ -16,7 +16,7 @@ class GeminiClient:
         self.session: Optional[ClientSession] = None
         self.exit_stack = AsyncExitStack()
         # Use a valid model name
-        self.model_name = "gemini-2.5-pro-exp-03-25"  # Replace with the correct model name
+        self.model_name = "gemini-2.0-flash"  # Replace with the correct model name
 
     async def connect_to_server(self, server_script_path: str):
         """Connect to the MCP server."""
@@ -45,16 +45,16 @@ class GeminiClient:
         try:
             # Get product information
             products = await self.get_available_products()
-            
-            # Create prompt for Gemini
+            print(products)
+        # Create prompt for Gemini
             prompt = f"""
-            You are a helpful shopping assistant from algeria so you speak arabic algerian dilect. Based on this product catalog:
+            أنت مساعد تسوق ذكي ومفيد يتحدث فقط باللغة العربية باللهجة الجزائرية. لا ترد بأي لغة أخرى غير العربية تحت أي ظرف من الظروف. 
+            كن محترفًا وأجب بإيجاز قدر الإمكان. بناءً على كتالوج المنتجات التالي:
             {products}
-            
-            Please answer this customer question: {query}
-            Provide specific product details when relevant.
+
+            يرجى الإجابة على سؤال العميل التالي باللغة العربية فقط: {query}
+            قم بتقديم تفاصيل محددة عن المنتجات إذا كانت ذات صلة.
             """
-            
             # Make a request to the Gemini API
             headers = {
                 "Content-Type": "application/json",
